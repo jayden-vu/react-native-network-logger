@@ -1,2 +1,2 @@
 export const warn = (message: string) =>
-  console.warn(`react-native-network-logger: ${message}`);
+  console.warn(`rn-network-logger: ${message}`);

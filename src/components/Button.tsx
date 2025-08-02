@@ -1,14 +1,6 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  TouchableOpacityProps,
-  Text,
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
-} from 'react-native';
-import { useThemedStyles, Theme } from '../theme';
+import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native';
+import { Theme, useThemedStyles } from '../theme';
 
 type Props = {
   children: string;
@@ -18,26 +10,12 @@ type Props = {
   textStyle?: StyleProp<TextStyle>;
 } & TouchableOpacityProps;
 
-const Button: React.FC<Props> = ({
-  children,
-  fullWidth,
-  style,
-  textStyle,
-  onPress,
-  ...rest
-}) => {
+const Button: React.FC<Props> = ({ children, fullWidth, style, textStyle, onPress, ...rest }) => {
   const styles = useThemedStyles(themedStyles);
 
   return (
-    <TouchableOpacity
-      accessibilityRole="button"
-      onPress={onPress}
-      style={style}
-      {...rest}
-    >
-      <Text style={[styles.button, fullWidth && styles.fullWidth, textStyle]}>
-        {children}
-      </Text>
+    <TouchableOpacity accessibilityRole="button" onPress={onPress} style={style} {...rest}>
+      <Text style={[styles.button, fullWidth && styles.fullWidth, textStyle]}>{children}</Text>
     </TouchableOpacity>
   );
 };

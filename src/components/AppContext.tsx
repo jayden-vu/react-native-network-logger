@@ -37,9 +37,7 @@ const initialState: AppState = {
   filterActive: false,
 };
 
-const AppContext = React.createContext<
-  AppState & { dispatch: Dispatch<Action> }
->({
+const AppContext = React.createContext<AppState & { dispatch: Dispatch<Action> }>({
   ...initialState,
   // @ts-ignore
   dispatch: {},
@@ -56,10 +54,7 @@ const reducer = (state: AppState, action: Action): AppState => {
       return {
         ...state,
         filter: action.payload,
-        filterActive:
-          !!action.payload.methods?.size ||
-          !!action.payload.status ||
-          !!action.payload.statusErrors,
+        filterActive: !!action.payload.methods?.size || !!action.payload.status || !!action.payload.statusErrors,
       };
     case 'CLEAR_FILTER':
       return {
@@ -75,18 +70,10 @@ const reducer = (state: AppState, action: Action): AppState => {
 export const useAppContext = () => useContext(AppContext);
 export const useDispatch = () => useAppContext().dispatch;
 
-export const AppContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return (
-    <AppContext.Provider value={{ ...state, dispatch }}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={{ ...state, dispatch }}>{children}</AppContext.Provider>;
 };
 
 export default AppContext;

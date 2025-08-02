@@ -1,27 +1,21 @@
 {
+  "extends": ["@nextgen/rn-config/ts"],
   "compilerOptions": {
-    "rootDir": ".",
-    "paths": {
-      "react-native-network-logger": ["./src/index"]
-    },
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "lib": ["esnext"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noImplicitUseStrict": false,
-    "noStrictGenericChecks": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "module": "preserve",
+      "typeRoots": [
+      "node_modules/@types",
+      "src/types"
+    ],
+    "jsx": "preserve",
     "strict": true,
-    "target": "esnext"
-  }
+    "rootDir": "."
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+    //
+  ],
+   "exclude": [
+    "node_modules"
+  ]
 }

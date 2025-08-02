@@ -65,7 +65,7 @@ const createHar = async (requests: NetworkRequestInfo[]) => {
     log: {
       version: '1.2',
       creator: {
-        name: 'react-native-network-logger',
+        name: 'rn-network-logger',
         version: '1.0.0',
       },
       pages: [],
