@@ -16,14 +16,7 @@ interface Props {
   maxRows: number;
 }
 
-const RequestList: React.FC<Props> = ({
-  requestsInfo,
-  onPressItem,
-  options,
-  showDetails,
-  compact,
-  maxRows,
-}) => {
+const RequestList: React.FC<Props> = ({ requestsInfo, onPressItem, options, showDetails, compact, maxRows }) => {
   const styles = useThemedStyles(themedStyles);
   const [searchValue, onChangeSearchText] = useState('');
   const { search, filter } = useAppContext();
@@ -31,21 +24,12 @@ const RequestList: React.FC<Props> = ({
 
   const filteredRequests = useMemo(() => {
     return requestsInfo
-      .filter((request) => {
-        const searchMatches =
-          !lcSearch ||
-          request.url.toLowerCase().includes(lcSearch) ||
-          request.gqlOperation?.toLowerCase().includes(lcSearch);
+      .filter(request => {
+        const searchMatches = !lcSearch || request.url.toLowerCase().includes(lcSearch) || request.gqlOperation?.toLowerCase().includes(lcSearch);
 
-        const filterMethodMatches =
-          (filter.methods?.size ?? 0) === 0 ||
-          filter.methods?.has(request.method);
+        const filterMethodMatches = (filter.methods?.size ?? 0) === 0 || filter.methods?.has(request.method);
 
-        const filterStatusMatches = filter.status
-          ? request.status === filter.status
-          : filter.statusErrors
-            ? request.status >= 400
-            : true;
+        const filterStatusMatches = filter.status ? request.status === filter.status : filter.statusErrors ? request.status >= 400 : true;
 
         const filterMatches = filterMethodMatches && filterStatusMatches;
 
@@ -56,25 +40,8 @@ const RequestList: React.FC<Props> = ({
 
   return (
     <View style={styles.container}>
-      {!showDetails && (
-        <SearchBar
-          value={searchValue}
-          onChangeText={onChangeSearchText}
-          options={options}
-        />
-      )}
-      <FlatList
-        keyExtractor={(item) => item.id}
-        data={filteredRequests}
-        renderItem={({ item }) => (
-          <ResultItem
-            request={item}
-            onPress={() => onPressItem(item.id)}
-            compact={compact}
-            list
-          />
-        )}
-      />
+      {!showDetails && <SearchBar value={searchValue} onChangeText={onChangeSearchText} options={options} />}
+      <FlatList keyExtractor={item => item.id} data={filteredRequests} renderItem={({ item }) => <ResultItem request={item} onPress={() => onPressItem(item.id)} compact={compact} list />} />
     </View>
   );
 };

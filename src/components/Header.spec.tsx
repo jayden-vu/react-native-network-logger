@@ -14,9 +14,7 @@ test('it renders header correctly', () => {
 });
 
 test('share button renders when provided with value', async () => {
-  const { getByTestId } = render(
-    <Header shareContent="share me">My Title</Header>
-  );
+  const { getByTestId } = render(<Header shareContent="share me">My Title</Header>);
 
   expect(getByTestId('header-text').props.children).toEqual('My Title');
   expect(getByTestId('header-share')).toBeDefined();
@@ -29,9 +27,7 @@ test('share button renders when provided with value', async () => {
 });
 
 test("share button doesn't render if content is empty string", async () => {
-  const { getByTestId, queryByTestId } = render(
-    <Header shareContent="">My Title</Header>
-  );
+  const { getByTestId, queryByTestId } = render(<Header shareContent="">My Title</Header>);
 
   expect(getByTestId('header-text').props.children).toEqual('My Title');
   expect(queryByTestId('header-share')).toBeNull();

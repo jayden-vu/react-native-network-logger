@@ -23,22 +23,8 @@ const SearchBar: React.FC<Props> = ({ options }) => {
       <View style={styles.searchContainer}>
         <View style={styles.searchBar}>
           <Icon name="search" />
-          <TextInput
-            onChangeText={(text) =>
-              dispatch({ type: 'SET_SEARCH', payload: text })
-            }
-            value={search}
-            placeholder="Filter URLs"
-            underlineColorAndroid="transparent"
-            style={styles.textInputSearch}
-            placeholderTextColor={theme.colors.muted}
-          />
-          <Icon
-            name="filter"
-            onPress={() => setShowFilters(!showFilters)}
-            accessibilityLabel="Filter"
-            iconStyle={[styles.filterIcon, filterActive && styles.filterActive]}
-          />
+          <TextInput onChangeText={text => dispatch({ type: 'SET_SEARCH', payload: text })} value={search} placeholder="Filter URLs" underlineColorAndroid="transparent" style={styles.textInputSearch} placeholderTextColor={theme.colors.muted} />
+          <Icon name="filter" onPress={() => setShowFilters(!showFilters)} accessibilityLabel="Filter" iconStyle={[styles.filterIcon, filterActive && styles.filterActive]} />
         </View>
         <Options options={options} />
       </View>

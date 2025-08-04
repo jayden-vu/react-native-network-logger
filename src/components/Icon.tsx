@@ -1,10 +1,5 @@
 import React, { Fragment } from 'react';
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableOpacityProps,
-} from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { Theme, useThemedStyles } from '../theme';
 
 const icons = {
@@ -48,13 +43,8 @@ const Icon = ({
         accessibilityRole: 'button',
         style: styles.iconWrapper,
         ...rest,
-      })}
-    >
-      <Image
-        source={icons[name]}
-        resizeMode="contain"
-        style={[styles.icon, onPress && styles.iconButton, iconStyle]}
-      />
+      })}>
+      <Image source={icons[name]} resizeMode="contain" style={[styles.icon, onPress && styles.iconButton, iconStyle]} />
     </Wrapper>
   );
 };

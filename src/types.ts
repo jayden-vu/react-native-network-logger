@@ -32,10 +32,7 @@ export type StartNetworkLoggingOptions = {
   refreshRate?: number;
 };
 
-export type NetworkRequestInfoRow = Pick<
-  NetworkRequestInfo,
-  'url' | 'gqlOperation' | 'id' | 'method' | 'status' | 'duration' | 'startTime'
->;
+export type NetworkRequestInfoRow = Pick<NetworkRequestInfo, 'url' | 'gqlOperation' | 'id' | 'method' | 'status' | 'duration' | 'startTime'>;
 
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;

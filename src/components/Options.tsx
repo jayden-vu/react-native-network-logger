@@ -16,18 +16,8 @@ const Options: React.FC<Props> = ({ options }) => {
 
   return (
     <>
-      <Icon
-        name="more"
-        onPress={() => setOpenOptions(true)}
-        testID="options-menu"
-        accessibilityLabel="More"
-        iconStyle={styles.iconButton}
-      />
-      <NLModal
-        visible={openOptions}
-        onClose={() => setOpenOptions(false)}
-        title="Options"
-      >
+      <Icon name="more" onPress={() => setOpenOptions(true)} testID="options-menu" accessibilityLabel="More" iconStyle={styles.iconButton} />
+      <NLModal visible={openOptions} onClose={() => setOpenOptions(false)} title="Options">
         {options.map(({ text, onPress }) => (
           <Button
             key={text}
@@ -35,8 +25,7 @@ const Options: React.FC<Props> = ({ options }) => {
               // Need to await in order for the getHar option to work
               await onPress();
               setOpenOptions(false);
-            }}
-          >
+            }}>
             {text}
           </Button>
         ))}

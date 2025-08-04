@@ -48,8 +48,7 @@ export default class NetworkRequestInfo {
 
     const body = this.dataSent && this.escapeQuotes(this.dataSent);
 
-    const methodPart =
-      this.method !== 'GET' ? `-X${this.method.toUpperCase()}` : '';
+    const methodPart = this.method !== 'GET' ? `-X${this.method.toUpperCase()}` : '';
     const bodyPart = body ? `-d '${body}'` : '';
 
     const parts = ['curl', methodPart, headersPart, bodyPart, `'${this.url}'`];
@@ -123,9 +122,7 @@ export default class NetworkRequestInfo {
   }
 
   async getResponseBody() {
-    const body = await (this.responseType !== 'blob'
-      ? this.response
-      : this.parseResponseBlob());
+    const body = await (this.responseType !== 'blob' ? this.response : this.parseResponseBlob());
 
     return this.stringifyFormat(body);
   }

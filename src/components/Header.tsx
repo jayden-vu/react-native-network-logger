@@ -12,11 +12,7 @@ const Header: React.FC<Props> = ({ children, shareContent }) => {
   const styles = useThemedStyles(themedStyles);
   return (
     <View style={styles.container}>
-      <Text
-        style={styles.header}
-        accessibilityRole="header"
-        testID="header-text"
-      >
+      <Text style={styles.header} accessibilityRole="header" testID="header-text">
         {children}
       </Text>
 

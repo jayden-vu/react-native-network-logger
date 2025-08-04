@@ -2,9 +2,7 @@ import React, { useContext } from 'react';
 import { DeepPartial } from './types';
 
 export type ThemeName = 'light' | 'dark';
-export const ThemeContext = React.createContext<ThemeName | DeepPartial<Theme>>(
-  'light'
-);
+export const ThemeContext = React.createContext<ThemeName | DeepPartial<Theme>>('light');
 type Themes = { [key in ThemeName]: Theme };
 
 export type Theme = {

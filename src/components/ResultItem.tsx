@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native';
 import { Theme, useThemedStyles, useTheme } from '../theme';
 import { backHandlerSet } from '../backHandler';
 import { NetworkRequestInfoRow } from '../types';
@@ -18,13 +12,7 @@ interface Props {
   list?: boolean;
 }
 
-const ResultItem: React.FC<Props> = ({
-  style,
-  request,
-  onPress,
-  compact,
-  list,
-}) => {
+const ResultItem: React.FC<Props> = ({ style, request, onPress, compact, list }) => {
   const styles = useThemedStyles(themedStyles);
   const theme = useTheme();
   const onDetailsPage = !onPress;
@@ -75,55 +63,29 @@ const ResultItem: React.FC<Props> = ({
   const UrlContainer = list ? View : ScrollView;
 
   return (
-    <MaybeTouchable
-      style={[styles.container, style]}
-      {...(onPress && { accessibilityRole: 'button', onPress })}
-    >
-      <View
-        style={compact ? styles.leftContainerCompact : styles.leftContainer}
-      >
+    <MaybeTouchable style={[styles.container, style]} {...(onPress && { accessibilityRole: 'button', onPress })}>
+      <View style={compact ? styles.leftContainerCompact : styles.leftContainer}>
         <View style={styles.leftContainerSplit}>
-          <Text
-            style={[styles.text, styles.method]}
-            accessibilityLabel={`Method: ${request.method}`}
-          >
+          <Text style={[styles.text, styles.method]} accessibilityLabel={`Method: ${request.method}`}>
             {request.method}
           </Text>
-          {compact && (
-            <Text style={styles.time}>{getTime(request.startTime)}</Text>
-          )}
+          {compact && <Text style={styles.time}>{getTime(request.startTime)}</Text>}
         </View>
         <View style={styles.leftContainerSplit}>
-          <Text
-            style={[styles.status, getStatusStyles(request.status)]}
-            accessibilityLabel={`Response status ${status}`}
-          >
+          <Text style={[styles.status, getStatusStyles(request.status)]} accessibilityLabel={`Response status ${status}`}>
             {status}
           </Text>
-          <Text style={styles.time}>
-            {request.duration > 0 ? `${request.duration}ms` : 'pending'}
-          </Text>
-          {!compact && (
-            <Text style={styles.time}>{getTime(request.startTime)}</Text>
-          )}
+          <Text style={styles.time}>{request.duration > 0 ? `${request.duration}ms` : 'pending'}</Text>
+          {!compact && <Text style={styles.time}>{getTime(request.startTime)}</Text>}
         </View>
       </View>
       <UrlContainer style={[styles.content]}>
-        <Text
-          numberOfLines={list ? 5 : undefined}
-          style={[
-            styles.text,
-            getUrlTextColor(request.status),
-            onDetailsPage && !backHandlerSet() && styles.paddedUrl,
-          ]}
-        >
+        <Text numberOfLines={list ? 5 : undefined} style={[styles.text, getUrlTextColor(request.status), onDetailsPage && !backHandlerSet() && styles.paddedUrl]}>
           {request.url}
         </Text>
         {gqlOperation && (
           <View style={styles.gqlOperation}>
-            <Text style={[styles.text, styles.gqlText]}>
-              gql: {gqlOperation}
-            </Text>
+            <Text style={[styles.text, styles.gqlText]}>gql: {gqlOperation}</Text>
           </View>
         )}
       </UrlContainer>

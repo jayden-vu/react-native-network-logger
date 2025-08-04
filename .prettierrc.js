@@ -5,7 +5,7 @@
 import config from '@nextgen/rn-config/prettierrc';
 
 const _config = {
-    ...config
+  ...config,
 };
 
 export default _config;

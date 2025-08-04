@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Share,
-  TextInput,
-  Platform,
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Share, TextInput, Platform } from 'react-native';
 import NetworkRequestInfo from '../NetworkRequestInfo';
 import { useThemedStyles, Theme } from '../theme';
 import { backHandlerSet } from '../backHandler';
@@ -20,19 +12,11 @@ interface Props {
   onClose(): void;
 }
 
-const Headers = ({
-  title = 'Headers',
-  headers,
-}: {
-  title: string;
-  headers?: object;
-}) => {
+const Headers = ({ title = 'Headers', headers }: { title: string; headers?: object }) => {
   const styles = useThemedStyles(themedStyles);
   return (
     <View>
-      <Header shareContent={headers && JSON.stringify(headers, null, 2)}>
-        {title}
-      </Header>
+      <Header shareContent={headers && JSON.stringify(headers, null, 2)}>{title}</Header>
       <View style={styles.content}>
         {Object.entries(headers || {}).map(([name, value]) => (
           <View style={styles.headerContainer} key={name}>
@@ -54,14 +38,7 @@ const LargeText: React.FC<{ children: string }> = ({ children }) => {
      * See this issue https://github.com/facebook/react-native/issues/19453
      * Note: Even with the fix mentioned in the comments, text with ~10,000 lines still fails to render
      */
-    return (
-      <TextInput
-        style={[styles.content, styles.largeContent]}
-        multiline
-        editable={false}
-        value={children}
-      />
-    );
+    return <TextInput style={[styles.content, styles.largeContent]} multiline editable={false} value={children} />;
   }
 
   return (
@@ -118,16 +95,10 @@ const RequestDetails: React.FC<Props> = ({ request, onClose }) => {
         <Header shareContent={responseBody}>Response Body</Header>
         <LargeText>{responseBody}</LargeText>
         <Header>More</Header>
-        <Button
-          onPress={() => Share.share({ message: getFullRequest() })}
-          fullWidth
-        >
+        <Button onPress={() => Share.share({ message: getFullRequest() })} fullWidth>
           Share full request
         </Button>
-        <Button
-          onPress={() => Share.share({ message: request.curlRequest })}
-          fullWidth
-        >
+        <Button onPress={() => Share.share({ message: request.curlRequest })} fullWidth>
           Share as cURL
         </Button>
       </ScrollView>

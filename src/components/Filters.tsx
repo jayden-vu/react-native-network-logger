@@ -5,25 +5,11 @@ import Button from './Button';
 import { useAppContext } from './AppContext';
 import { Theme, useTheme, useThemedStyles } from '../theme';
 
-const FilterButton = ({
-  onPress,
-  active,
-  children,
-}: {
-  onPress: () => void;
-  active?: boolean;
-  children: string;
-}) => {
+const FilterButton = ({ onPress, active, children }: { onPress: () => void; active?: boolean; children: string }) => {
   const styles = useThemedStyles(themedStyles);
 
   return (
-    <Button
-      style={[styles.methodButton, active && styles.buttonActive]}
-      textStyle={[styles.buttonText, active && styles.buttonActiveText]}
-      onPress={onPress}
-      accessibilityRole="checkbox"
-      accessibilityState={{ checked: active }}
-    >
+    <Button style={[styles.methodButton, active && styles.buttonActive]} textStyle={[styles.buttonText, active && styles.buttonActiveText]} onPress={onPress} accessibilityRole="checkbox" accessibilityState={{ checked: active }}>
       {children}
     </Button>
   );
@@ -43,7 +29,7 @@ const Filters = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
           Method
         </Text>
         <View style={styles.methods}>
-          {methods.map((method) => (
+          {methods.map(method => (
             <FilterButton
               key={method}
               active={filter.methods?.has(method)}
@@ -62,8 +48,7 @@ const Filters = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
                     methods: newMethods,
                   },
                 });
-              }}
-            >
+              }}>
               {method}
             </FilterButton>
           ))}
@@ -83,8 +68,7 @@ const Filters = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
                   status: undefined,
                 },
               });
-            }}
-          >
+            }}>
             Errors
           </FilterButton>
           <TextInput
@@ -95,7 +79,7 @@ const Filters = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
             value={filter.status?.toString() || ''}
             maxLength={3}
             accessibilityLabel="Status Code"
-            onChangeText={(text) => {
+            onChangeText={text => {
               const status = parseInt(text, 10);
               dispatch({
                 type: 'SET_FILTER',
@@ -116,8 +100,7 @@ const Filters = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
               type: 'CLEAR_FILTER',
             });
             onClose();
-          }}
-        >
+          }}>
           Reset All Filters
         </Button>
       </NLModal>

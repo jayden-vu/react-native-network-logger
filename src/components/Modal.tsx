@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Modal,
-  TouchableWithoutFeedback,
-  Text,
-} from 'react-native';
+import { View, StyleSheet, Modal, TouchableWithoutFeedback, Text } from 'react-native';
 
 import { Theme, useThemedStyles } from '../theme';
 import Icon from './Icon';
@@ -21,13 +15,7 @@ const NLModal = ({ visible, onClose, children, title }: Props) => {
   const styles = useThemedStyles(themedStyles);
 
   return (
-    <Modal
-      visible={visible}
-      animationType="fade"
-      transparent
-      onDismiss={onClose}
-      onRequestClose={onClose}
-    >
+    <Modal visible={visible} animationType="fade" transparent onDismiss={onClose} onRequestClose={onClose}>
       <View style={styles.modalRoot}>
         <TouchableWithoutFeedback onPress={onClose}>
           <View style={styles.backdrop} />

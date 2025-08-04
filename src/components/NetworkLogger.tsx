@@ -25,12 +25,7 @@ const sortRequests = (requests: NetworkRequestInfo[], sort: 'asc' | 'desc') => {
   return [...requests];
 };
 
-const NetworkLogger: React.FC<Props> = ({
-  theme = 'light',
-  sort = 'desc',
-  compact = false,
-  maxRows,
-}) => {
+const NetworkLogger: React.FC<Props> = ({ theme = 'light', sort = 'desc', compact = false, maxRows }) => {
   const [requests, setRequests] = useState(logger.getRequests());
   const [request, setRequest] = useState<NetworkRequestInfo>();
   const [showDetails, _setShowDetails] = useState(false);
@@ -72,10 +67,7 @@ const NetworkLogger: React.FC<Props> = ({
       return false;
     };
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      onBack
-    );
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', onBack);
 
     return () => backHandler.remove();
   }, [showDetails, setShowDetails]);
@@ -112,7 +104,7 @@ const NetworkLogger: React.FC<Props> = ({
   }, [paused, getHar]);
 
   const requestsInfo = useMemo(() => {
-    return sortRequests(requests, sort).map((r) => r.toRow());
+    return sortRequests(requests, sort).map(r => r.toRow());
   }, [sort, requests]);
 
   return (
@@ -121,15 +113,10 @@ const NetworkLogger: React.FC<Props> = ({
         <View style={styles.visible}>
           {showDetails && !!request && (
             <View style={styles.visible}>
-              <RequestDetails
-                onClose={() => setShowDetails(false)}
-                request={request}
-              />
+              <RequestDetails onClose={() => setShowDetails(false)} request={request} />
             </View>
           )}
-          <View
-            style={showDetails && !!request ? styles.hidden : styles.visible}
-          >
+          <View style={showDetails && !!request ? styles.hidden : styles.visible}>
             {mounted && !logger.enabled && !requests.length ? (
               <Unmounted />
             ) : (
@@ -145,8 +132,8 @@ const NetworkLogger: React.FC<Props> = ({
                   options={options}
                   showDetails={showDetails && !!request}
                   maxRows={maxRows ?? requests.length}
-                  onPressItem={(id) => {
-                    setRequest(requests.find((r) => r.id === id));
+                  onPressItem={id => {
+                    setRequest(requests.find(r => r.id === id));
                     setShowDetails(true);
                   }}
                 />

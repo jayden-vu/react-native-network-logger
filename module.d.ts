@@ -1,11 +1,5 @@
 declare module 'react-native/Libraries/Blob/FileReader' {
-  type Events =
-    | 'abort'
-    | 'error'
-    | 'load'
-    | 'loadstart'
-    | 'loadend'
-    | 'progress';
+  type Events = 'abort' | 'error' | 'load' | 'loadstart' | 'loadend' | 'progress';
   export default class {
     constructor();
 

@@ -7,14 +7,9 @@ const Unmounted = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Unmounted Error</Text>
+      <Text style={styles.body}>It looks like the network logger hasn’t been enabled yet.</Text>
       <Text style={styles.body}>
-        It looks like the network logger hasn’t been enabled yet.
-      </Text>
-      <Text style={styles.body}>
-        This is likely due to you running another debugging tool that is also
-        intercepting network requests. Either disable that or start the network
-        logger with the option:{' '}
-        <Text style={styles.code}>"forceEnable: true"</Text>.
+        This is likely due to you running another debugging tool that is also intercepting network requests. Either disable that or start the network logger with the option: <Text style={styles.code}>"forceEnable: true"</Text>.
       </Text>
     </View>
   );
