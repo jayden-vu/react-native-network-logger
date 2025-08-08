@@ -24,7 +24,7 @@ const themedStyles = (theme: Theme) =>
   StyleSheet.create({
     button: {
       color: theme.colors.link,
-      fontSize: 18,
+      fontSize: 16,
       padding: 10,
       alignSelf: 'flex-start',
     },

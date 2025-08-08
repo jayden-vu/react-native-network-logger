@@ -37,9 +37,9 @@ const darkTheme: Theme = {
 
 const lightTheme: Theme = {
   colors: {
-    background: '#ededed',
+    background: '#ffffff',
     link: '#0077ff',
-    card: '#ffffff',
+    card: '#f1f5f9',
     text: '#000000',
     statusGood: '#28a844',
     statusWarning: '#ffc007',

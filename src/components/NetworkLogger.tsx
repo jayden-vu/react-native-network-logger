@@ -160,4 +160,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { NetworkLogger as default, Props as NetworkLoggerProps };
+export { NetworkLogger as default, type Props as NetworkLoggerProps };

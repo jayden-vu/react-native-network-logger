@@ -3,20 +3,17 @@
   "description": "An HTTP traffic monitor for React Native with zero dependencies",
   "private": true,
   "version": "1.0.0",
+  "base-repository": {
+    "type": "git",
+    "url": "https://github.com/alexbrazier/react-native-network-logger.git",
+    "version": "2.0.1"
+  },
   "main": "src/index",
   "react-native": "src/index",
   "codegenConfig": {
     "name": "RNComponentsSpec",
     "type": "modules",
     "jsSrcsDir": "src"
-  },
-  "exports": {
-    ".": {
-      "source": "./src/index.tsx",
-      "types": "./lib/typescript/src/index.d.ts",
-      "default": "./lib/module/index.js"
-    },
-    "./package.json": "./package.json"
   },
   "scripts": {
     "test": "jest",
@@ -31,7 +28,8 @@
   "devDependencies": {
     "@nextgen/rn-config": "workspace:*",
     "@nextgen/rn-ui": "workspace:*",
-    "@types/react": "^18.2.6"
+    "@types/react": "^18.2.6",
+    "react-native": "^0.77.0"
   },
   "peerDependencies": {
     "@nextgen/rn-ui": "*"

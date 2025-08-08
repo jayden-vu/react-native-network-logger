@@ -137,7 +137,7 @@ const themedStyles = (theme: Theme) =>
       maxHeight: 250,
     },
     method: {
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: 'bold',
       textAlign: 'center',
       padding: 0,

@@ -1,55 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Share, TextInput, Platform } from 'react-native';
-import NetworkRequestInfo from '../NetworkRequestInfo';
-import { useThemedStyles, Theme } from '../theme';
+import React, { useEffect, useState } from 'react';
+import { Platform, ScrollView, Share, StyleSheet, Text, TextInput, View } from 'react-native';
 import { backHandlerSet } from '../backHandler';
-import ResultItem from './ResultItem';
-import Header from './Header';
+import NetworkRequestInfo from '../NetworkRequestInfo';
+import { Theme, useThemedStyles } from '../theme';
 import Button from './Button';
+import Header from './Header';
+import ResultItem from './ResultItem';
 
 interface Props {
   request: NetworkRequestInfo;
   onClose(): void;
 }
 
-const Headers = ({ title = 'Headers', headers }: { title: string; headers?: object }) => {
+const Collapse: React.FC<{ title: string; children: React.ReactNode | object; isExpanded?: boolean }> = ({ title = 'Headers', children: body, isExpanded = false }) => {
   const styles = useThemedStyles(themedStyles);
+
+  const [s, setS] = useState({ toggle: isExpanded });
+
   return (
     <View>
-      <Header shareContent={headers && JSON.stringify(headers, null, 2)}>{title}</Header>
-      <View style={styles.content}>
-        {Object.entries(headers || {}).map(([name, value]) => (
-          <View style={styles.headerContainer} key={name}>
-            <Text style={styles.headerKey}>{name}: </Text>
-            <Text style={styles.headerValue}>{value}</Text>
+      <Header onPress={() => setS(pre => ({ ...pre, toggle: !pre.toggle }))} shareContent={(body && JSON.stringify(body, null, 2)) as any}>
+        {title}
+      </Header>
+      {s.toggle &&
+        (typeof body === 'object' ? (
+          <View style={styles.content}>
+            {Object.entries(body || {}).map(([name, value]) => (
+              <View style={styles.headerContainer} key={name}>
+                <Text style={styles.headerKey}>{name}: </Text>
+                <Text style={styles.headerValue}>{value}</Text>
+              </View>
+            ))}
+          </View>
+        ) : Platform.OS === 'ios' && typeof body === 'string' ? (
+          <TextInput style={[styles.content, styles.largeContent]} multiline editable={false} value={body} />
+        ) : (
+          <View style={styles.largeContent}>
+            <ScrollView nestedScrollEnabled>
+              <View>
+                <Text style={styles.content} selectable>
+                  {body}
+                </Text>
+              </View>
+            </ScrollView>
           </View>
         ))}
-      </View>
-    </View>
-  );
-};
-
-const LargeText: React.FC<{ children: string }> = ({ children }) => {
-  const styles = useThemedStyles(themedStyles);
-
-  if (Platform.OS === 'ios') {
-    /**
-     * A readonly TextInput is used because large Text blocks sometimes don't render on iOS
-     * See this issue https://github.com/facebook/react-native/issues/19453
-     * Note: Even with the fix mentioned in the comments, text with ~10,000 lines still fails to render
-     */
-    return <TextInput style={[styles.content, styles.largeContent]} multiline editable={false} value={children} />;
-  }
-
-  return (
-    <View style={styles.largeContent}>
-      <ScrollView nestedScrollEnabled>
-        <View>
-          <Text style={styles.content} selectable>
-            {children}
-          </Text>
-        </View>
-      </ScrollView>
     </View>
   );
 };
@@ -88,23 +83,20 @@ const RequestDetails: React.FC<Props> = ({ request, onClose }) => {
     <View style={styles.container}>
       <ResultItem request={request} style={styles.info} />
       <ScrollView style={styles.scrollView} nestedScrollEnabled>
-        <Headers title="Request Headers" headers={request.requestHeaders} />
-        <Header shareContent={requestBody}>Request Body</Header>
-        <LargeText>{requestBody}</LargeText>
-        <Headers title="Response Headers" headers={request.responseHeaders} />
-        <Header shareContent={responseBody}>Response Body</Header>
-        <LargeText>{responseBody}</LargeText>
-        <Header>More</Header>
+        <Collapse title="Request Headers" children={request.requestHeaders} />
+        <Collapse title="Request Body" children={requestBody} />
+        <Collapse title="Response Headers" children={request.responseHeaders} />
+        <Collapse title="Response Body" children={responseBody} isExpanded={true} />
         <Button onPress={() => Share.share({ message: getFullRequest() })} fullWidth>
-          Share full request
+          {'Share full request'}
         </Button>
         <Button onPress={() => Share.share({ message: request.curlRequest })} fullWidth>
-          Share as cURL
+          {'Share as cURL'}
         </Button>
       </ScrollView>
       {!backHandlerSet() && (
         <Button onPress={onClose} style={styles.close}>
-          Close
+          {'Close'}
         </Button>
       )}
     </View>

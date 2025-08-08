@@ -49,6 +49,7 @@ const themedStyles = (theme: Theme) =>
       padding: 16,
       maxWidth: '100%',
       minWidth: '60%',
+      margin: 24,
       backgroundColor: theme.colors.background,
     },
     titleContainer: {

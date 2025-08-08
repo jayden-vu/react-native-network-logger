@@ -64,6 +64,7 @@ const themedStyles = (theme: Theme) =>
     },
     searchContainer: {
       flexDirection: 'row',
+      marginHorizontal: 8,
     },
     menu: { alignSelf: 'center' },
     title: {
